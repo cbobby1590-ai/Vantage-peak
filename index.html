@@ -3,51 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vantage Peake Bank | Secure Personal & Business Banking</title>
-    <link rel="stylesheet" href="base.css">
+    <title>Financial Application</title>
+    <style>
+        /* Global CSS Reset & Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevents ugly browser page scrolling */
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        /* App Base Layout Layout Frame */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* App Screens Structure */
+        .app-view {
+            display: none; /* Hidden by default */
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto; /* Independent scrolling inside each view */
+            padding-bottom: 90px; /* Buffer space so navigation bar never overlaps data */
+        }
+
+        /* Displays the targeted view layout */
+        .app-view.active-view {
+            display: block;
+        }
+
+        /* Typography & Uniform Containers */
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            margin-bottom: 16px;
+        }
+
+        /* -----------------------------
+           VIEW 1: DASHBOARD DESIGNS
+        -------------------------------- */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metrics-grid .card h3 {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .metrics-grid .card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .value.green { color: #10b981; }
+        .value.red { color: #f43f5e; }
+
+        .transactions-section h2 {
+            font-size: 1.15rem;
+            margin-bottom: 16px;
+        }
+
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background-color: #0f172a;
+            border-radius: 8px;
+            border-left: 4px solid #38bdf8;
+        }
+
+        .transaction-item.income { border-left-color: #10b981; }
+        .transaction-item.expense { border-left-color: #f43f5e; }
+
+        .tx-info .tx-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .tx-info .tx-date {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .tx-amount { font-weight: 700; }
+        .tx-amount.income { color: #10b981; }
+        .tx-amount.expense { color: #f43f5e; }
+
+        /* -----------------------------
+           VIEW 2: TRANSFER DESIGNS
+        -------------------------------- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #38bdf8;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #38bdf8;
+            border: none;
+            border-radius: 8px;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* -----------------------------
+           VIEW 3: REWARDS DESIGNS
+        -------------------------------- */
+        .reward-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reward-pts {
+            font-weight: 700;
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+
+        .claim-btn {
+            padding: 8px 16px;
+            background-color: #38bdf8;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #0f172a;
+        }
+
+        /* -----------------------------
+           VIEW 4: SETTINGS DESIGNS
+        -------------------------------- */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        .setting-item:last-child { border-bottom: none; }
+        .setting-info h3 { font-size: 1rem; font-weight: 500; }
+        .setting-info p { font-size: 0.85rem; color: #94a3b8; }
+
+        /* -----------------------------
+           FIXED BOTTOM NAVIGATION BAR
+        -------------------------------- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #1e293b;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            width: 25%;
+            height: 100%;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #38bdf8;
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Public Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">Vantage<span>Peake</span></div>
-        <ul class="nav-links">
-            <li><a href="#">Personal</a></li>
-            <li><a href="#">Commercial</a></li>
-            <li><a href="#">Wealth</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="login.html" class="btn-login">Secure Login</a></li>
-        </ul>
-    </nav>
+    <div class="app-container">
 
-    <!-- Marketing Hero Area -->
-    <header class="hero">
-        <h1>Financial Frameworks Engineered for Growth</h1>
-        <p>Access secure checking accounts, high-yield deposit structures, and international liquid capital instruments from an intuitive dashboard layout.</p>
-    </header>
+        <!-- SCREEN 1: DASHBOARD -->
+        <main id="dashboard" class="app-view active-view">
+            <header class="header">
+                <h1>Financial Dashboard</h1>
+            </header>
 
-    <!-- Product Features Matrix -->
-    <main class="container">
-        <div class="grid-3">
+            <section class="metrics-grid">
+                <div class="card">
+                    <h3>Total Balance</h3>
+                    <div class="value">$14,240.50</div>
+                </div>
+                <div class="card">
+                    <h3>Monthly Income</h3>
+                    <div class="value green">+$5,300.00</div>
+                </div>
+                <div class="card">
+                    <h3>Monthly Expenses</h3>
+                    <div class="value red">-$2,120.45</div>
+                </div>
+            </section>
+
+            <section class="card transactions-section">
+                <h2>Recent Transactions</h2>
+                <div class="transaction-list">
+                    <div class="transaction-item expense">
+                        <div class="tx-info">
+                            <div class="tx-name">Netflix Subscription</div>
+                            <div class="tx-date">Sept 16, 2026 • Streaming</div>
+                        </div>
+                        <div class="tx-amount expense">-$15.49</div>
+                    </div>
+                    <div class="transaction-item income">
+                        <div class="tx-info">
+                            <div class="tx-name">Freelance Web Design</div>
+                            <div class="tx-date">Sept 15, 2026 • Income</div>
+                        </div>
+                        <div class="tx-amount income">+$1,200.00</div>
+                    </div>
+                    <div class="transaction-item expense">
+                        <div class="tx-info">
+                            <div class="tx-name">Starbucks Coffee</div>
+                            <div class="tx-date">Sept 14, 2026 • Food</div>
+                        </div>
+                        <div class="tx-amount expense">-$6.75</div>
+                    </div>
+                    <div class="transaction-item expense">
+                        <div class="tx-info">
+                            <div class="tx-name">Amazon Web Services</div>
+                            <div class="tx-date">Sept 12, 2026 • Cloud</div>
+                        </div>
+                        <div class="tx-amount expense">-$42.30</div>
+                    </div>
+                    <div class="transaction-item income">
+                        <div class="tx-info">
+                            <div class="tx-name">Bi-Weekly Salary</div>
+                            <div class="tx-date">Sept 11, 2026 • Salary</div>
+                        </div>
+                        <div class="tx-amount income">+$2,450.00</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- SCREEN 2: TRANSFER -->
+        <main id="transfer" class="app-view">
+            <header class="header">
+                <h1>Transfer Funds</h1>
+            </header>
             <div class="card">
-                <h3>Personal Banking</h3>
-                <p>Maximize asset appreciation using checking frameworks combined with automated high-yield savings structures.</p>
-            </div>
-            <div class="card">
-                <h3>Commercial Accounts</h3>
-                <p>Deploy streamlined corporate payroll architectures, domestic clearing options, and merchant processing integrations.</p>
-            </div>
-            <div class="card">
-                <h3>Asset Optimization</h3>
-                <p>Coordinate directly with private asset configuration advisers to lock down diversified tax-shielded investments.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footnote Regulatory Layer -->
-    <footer>
-        <p>&copy; 2026 Vantage Peake Bank. Equal Housing Lender. Member FDIC.</p>
-    </footer>
-
-</body>
-</html>
+                <div class="form-group">
+                    <label>Recipient Name / Account</label>
