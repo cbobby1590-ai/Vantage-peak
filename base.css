@@ -1,0 +1,238 @@
+/* Corporate Banking Color System & Variables */
+:root {
+    --primary-navy: #0F172A;
+    --accent-emerald: #10B981;
+    --slate-blue: #334155;
+    --light-bg: #F8FAFC;
+    --border-color: #E2E8F0;
+    --text-dark: #1E293B;
+    --text-light: #64748B;
+    --white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+/* Header & Public Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-navy);
+    padding: 1rem 5%;
+    color: var(--white);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--accent-emerald);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-emerald);
+}
+
+.btn-login {
+    background-color: var(--accent-emerald);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Hero Section */
+.hero {
+    background-color: var(--primary-navy);
+    color: var(--white);
+    padding: 5rem 5%;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Public Main Grid Layouts */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-navy);
+}
+
+/* Form Styling (Login & Transfer) */
+.form-wrapper {
+    max-width: 450px;
+    margin: 5rem auto;
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--primary-navy);
+    color: var(--white);
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: var(--slate-blue);
+}
+
+/* Authenticated Dashboard Core Split-Pane Grid */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: var(--primary-navy);
+    color: var(--white);
+    padding: 2rem 1.5rem;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-menu a {
+    display: block;
+    color: #94A3B8;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.sidebar-menu a.active, .sidebar-menu a:hover {
+    background-color: var(--slate-blue);
+    color: var(--white);
+}
+
+.dashboard-content {
+    padding: 2rem;
+}
+
+/* Ledger Transaction Records Table */
+.table-wrapper {
+    background-color: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #F1F5F9;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.text-success { color: #10B981; }
+.text-danger { color: #EF4444; }
+
+/* Footers */
+footer {
+    background-color: var(--primary-navy);
+    color: #94A3B8;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--slate-blue);
+}
