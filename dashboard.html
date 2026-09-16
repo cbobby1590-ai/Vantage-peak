@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,11 @@
 <body>
 
     <div class="dashboard-layout">
-        <!-- Sidebar Navigation Menu Column -->
         <aside class="sidebar">
             <div class="logo">Vantage<span>Peake</span></div>
             <ul class="sidebar-menu">
                 <li><a href="dashboard.html" class="active">Overview Ledger</a></li>
-                <!-- New Requested Pages Added Under the Main Ledger -->
-                <li><a href="#transactions">Transaction Records</a></li>
-                <li><a href="#rewards">Rewards Portal</a></li>
-                <li><a href="#settings">System Settings</a></li>
+                <li><a href="rewards.html">Rewards Portal</a></li>
                 <li><a href="transfer.html">Fund Transits</a></li>
                 <li><a href="#">Card Matrix</a></li>
                 <li><a href="#">Document Records</a></li>
@@ -25,7 +22,6 @@
             </ul>
         </aside>
 
-        <!-- Main Account Dashboard Data Feed Column -->
         <main class="dashboard-content">
             <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                 <div>
@@ -38,7 +34,6 @@
                 </div>
             </header>
 
-            <!-- Liquidity & Yield Asset Blocks -->
             <div class="grid-3">
                 <div class="card">
                     <small style="color: var(--text-light); font-weight: 600;">Liquid Checking Ledger</small>
@@ -52,8 +47,8 @@
                 </div>
             </div>
 
-            <!-- Expanded Ledger Transaction Table -->
-            <div class="table-wrapper" id="transactions">
+            <!-- Highly Expanded Transaction Ledger -->
+            <div class="table-wrapper">
                 <div style="padding: 1.25rem; font-weight: 600; border-bottom: 1px solid var(--border-color); background-color: #F8FAFC;">
                     Recent Account Transaction History Ledger
                 </div>
@@ -74,6 +69,12 @@
                             <td class="text-success">+$12,500,000.00</td>
                         </tr>
                         <tr>
+                            <td>2026-03-14</td>
+                            <td>Zurich Financial Asset Swap Outflow</td>
+                            <td>International Wire</td>
+                            <td class="text-danger">-$1,400,000.00</td>
+                        </tr>
+                        <tr>
                             <td>2026-03-12</td>
                             <td>Corporate Equity Dividend Issue</td>
                             <td>Direct Deposit ACH</td>
@@ -84,6 +85,12 @@
                             <td>Vanguard Asset Liquidation Placement</td>
                             <td>Securities Wire</td>
                             <td class="text-success">+$21,350,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>2026-03-08</td>
+                            <td>London Real Estate Escrow Wire</td>
+                            <td>International Wire</td>
+                            <td class="text-danger">-$4,200,000.00</td>
                         </tr>
                         <tr>
                             <td>2026-03-05</td>
@@ -104,10 +111,22 @@
                             <td class="text-success">+$8,500.00</td>
                         </tr>
                         <tr>
+                            <td>2026-02-27</td>
+                            <td>Fine Art Consignment Premium</td>
+                            <td>Inbound ACH</td>
+                            <td class="text-success">+$115,000.00</td>
+                        </tr>
+                        <tr>
                             <td>2026-02-25</td>
                             <td>Premium Insurance Underwriters pool</td>
                             <td>Standing Instruction</td>
                             <td class="text-danger">-$1,120.00</td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-20</td>
+                            <td>Marine Transit Yacht Mooring Registry</td>
+                            <td>Merchant Settlement</td>
+                            <td class="text-danger">-$6,400.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,5 +136,6 @@
 
 </body>
 </html>
+
 
 
