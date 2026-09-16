@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Payment | Vantage Peake Bank</title>
+    <style>
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 90px; /* Space for the bottom navbar */
+        }
+
+        /* Top Bar Layout */
+        .top-navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-greeting h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .brand-greeting p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Core Grid Container */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+        /* Content Blocks */
+        .bill-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            height: max-content;
+        }
+
+        .bill-card h3 {
+            font-size: 1.15rem;
+            color: #0f172a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        /* Payee Checklist List */
+        .payee-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .payee-item:last-child {
+            border-bottom: none;
+        }
+
+        .payee-details h4 {
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        .payee-details p {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .payee-due-amount {
+            text-align: right;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .pay-now-btn {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .pay-now-btn:hover {
+            background-color: #d4af37;
+            color: #0f172a;
+        }
+
+        /* Form Submissions Layout */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .form-group select, 
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .form-group select:focus, 
+        .form-group input:focus {
+            border-color: #0f172a;
+        }
+
+        .submit-bill-btn {
+            width: 100%;
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 5px;
+        }
+
+        .submit-bill-btn:hover {
+            background-color: #d4af37;
+            color: #0f172a;
+        }
+
+        /* Bottom Sticky Layout Bar */
+        footer {
+            background-color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid #e2e8f0;
+            z-index: 10000;
+        }
+
+        .bottom-nav {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            list-style: none;
+        }
+
+        .bottom-nav li a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .bottom-nav li a:hover,
+        .bottom-nav li a.active {
+            color: #0f172a;
+            background-color: #f1f5f9;
+        }
+
+        .bottom-nav li a.exit-link {
+            color: #dc2626;
+        }
+
+        /* Screen Customizations */
+        @media (max-width: 850px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .bottom-nav {
+                padding: 10px 5px;
+            }
+            .bottom-nav li a {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Secure Header System -->
+    <nav class="top-navbar">
+        <div class="brand-greeting">
+            <h2>Digital Bill Payment</h2>
+            <p>Authorized User: Sarah Emma Sophia</p>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <main>
+        
+        <!-- Left Side: Scheduled / Upcoming Bills -->
+        <div class="bill-card">
+            <h3>Pending & Registered Payees</h3>
+            <div class="payee-list">
+                
+                <div class="payee-item">
+                    <div class="payee-details">
+                        <h4>Metropolitan Gas &amp; Energy</h4>
+                        <p>Account ID: ••••-8841-01</p>
+                        <p style="color: #dc2626; font-size: 0.75rem;">Due Date: In 4 Days</p>
+                    </div>
+                    <div>
+                        <div class="payee-due-amount">$185.20</div>
+                        <button class="pay-now-btn" onclick="alert('Payment processing initiated for Metropolitan Gas.')">Pay Invoice</button>
+                    </div>
+                </div>
+
+                <div class="payee-item">
+                    <div class="payee-details">
+                        <h4>Verizon Wireless Premium Cellular</h4>
+                        <p>Account ID: ••••-1192-55</p>
+                        <p style="color: #64748b; font-size: 0.75rem;">Autopay Scheduled</p>
+                    </div>
+                    <div>
+                        <div class="payee-due-amount">$94.15</div>
+                        <button class="pay-now-btn" style="background-color: #e2e8f0; color: #475569;" disabled>Scheduled</button>
+                    </div>
+                </div>
+
+                <div class="payee-item">
+                    <div class="payee-details">
+                        <h4>Apex Property Management Group</h4>
+                        <p>Account ID: ••••-0042-RENT</p>
+                        <p style="color: #16a34a; font-size: 0.75rem;">Paid on Sep 01</p>
+                    </div>
+                    <div>
+                        <div class="payee-due-amount">$2,450.00</div>
+                        <button class="pay-now-btn" style="background-color: #f1f5f9; color: #94a3b8;" onclick="alert('Invoice already settled for this period.')">Receipt</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Side: Pay a New/One-time Bill Form -->
+        <div class="bill-card">
+            <h3>One-Time Bill Settlement</h3>
+            <form onsubmit="alert('Bill payment successfully executed.'); return false;">
+                
+                <div class="form-group">
+                    <label for="funding-source">Pay From Account</label>
+                    <select id="funding-source" required>
+                        <option value="checking">Vantage Checking (•••• 9821) - $48,250.71</option>
+                        <option value="savings">High Yield Savings (•••• 4402) - $214,890.45</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="vendor-name">Payee / Organization</label>
+                    <input type="text" id="vendor-name" placeholder="e.g. Health Insurance, Credit Card Corporation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="billing-number">Billing Reference Account #</label>
+                    <input type="text" id="billing-number" placeholder="Enter invoice reference or account number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bill-amount">Amount (USD)</label>
+                    <input type="number" id="bill-amount" placeholder="0.00" min="0.50" max="50000" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pay-date">Execution Date</label>
+                    <input type="date" id="pay-date" required>
+                </div>
+
