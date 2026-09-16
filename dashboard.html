@@ -9,39 +9,54 @@
 <body>
 
     <div class="dashboard-layout">
+        <!-- Sidebar Navigation Menu Column -->
         <aside class="sidebar">
             <div class="logo">Vantage<span>Peake</span></div>
             <ul class="sidebar-menu">
                 <li><a href="dashboard.html" class="active">Overview Ledger</a></li>
+                <!-- New Requested Pages Added Under the Main Ledger -->
+                <li><a href="#transactions">Transaction Records</a></li>
+                <li><a href="#rewards">Rewards Portal</a></li>
+                <li><a href="#settings">System Settings</a></li>
                 <li><a href="transfer.html">Fund Transits</a></li>
                 <li><a href="#">Card Matrix</a></li>
                 <li><a href="#">Document Records</a></li>
-                <li><a href="#">Security Profiles</a></li>
                 <li><a href="index.html" style="margin-top: 3rem; color: #EF4444;">Terminate Session</a></li>
             </ul>
         </aside>
 
+        <!-- Main Account Dashboard Data Feed Column -->
         <main class="dashboard-content">
             <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <h2>Welcome Back, Client System Profile</h2>
-                <div style="font-size: 0.9rem; color: var(--text-light);">Last IP Authentication: Active Session</div>
+                <div>
+                    <small style="color: var(--text-light); text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Primary Profile Owner</small>
+                    <h2 style="margin-top: 0.25rem;">Sarah Emma Sophia</h2>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-light); text-align: right;">
+                    <div>System ID: #VPT-94821</div>
+                    <div>Session Status: Authenticated</div>
+                </div>
             </header>
 
+            <!-- Liquidity & Yield Asset Blocks -->
             <div class="grid-3">
                 <div class="card">
                     <small style="color: var(--text-light); font-weight: 600;">Liquid Checking Ledger</small>
-                    <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--primary-navy);">$14,245.82</h2>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.5rem; color: var(--primary-navy);">$34,000,000.00</h2>
                     <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">Routing Route: ****5678</p>
                 </div>
                 <div class="card">
                     <small style="color: var(--text-light); font-weight: 600;">High-Yield Yield Hold</small>
-                    <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--accent-emerald);">$85,119.04</h2>
+                    <h2 style="font-size: 2.2rem; margin-top: 0.5rem; color: var(--accent-emerald);">$5,241,904.11</h2>
                     <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">Yield: 4.85% APY</p>
                 </div>
             </div>
 
-            <div class="table-wrapper">
-                <div style="padding: 1.25rem; font-weight: 600; border-bottom: 1px solid var(--border-color);">Recent Operational Ledger Inclusions</div>
+            <!-- Expanded Ledger Transaction Table -->
+            <div class="table-wrapper" id="transactions">
+                <div style="padding: 1.25rem; font-weight: 600; border-bottom: 1px solid var(--border-color); background-color: #F8FAFC;">
+                    Recent Account Transaction History Ledger
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -53,22 +68,46 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>2026-03-15</td>
+                            <td>International Capital Asset Transfer</td>
+                            <td>Inbound Wire</td>
+                            <td class="text-success">+$12,500,000.00</td>
+                        </tr>
+                        <tr>
                             <td>2026-03-12</td>
-                            <td>Global Clearing Payroll Origin</td>
+                            <td>Corporate Equity Dividend Issue</td>
                             <td>Direct Deposit ACH</td>
-                            <td class="text-success">+$4,250.00</td>
+                            <td class="text-success">+$250,000.00</td>
                         </tr>
                         <tr>
                             <td>2026-03-10</td>
-                            <td>Digital Point-of-Sale Marketplace</td>
-                            <td>Merchant Settlement</td>
-                            <td class="text-danger">-$124.50</td>
+                            <td>Vanguard Asset Liquidation Placement</td>
+                            <td>Securities Wire</td>
+                            <td class="text-success">+$21,350,000.00</td>
                         </tr>
                         <tr>
-                            <td>2026-03-08</td>
-                            <td>Automated Utility Pipeline Transfer</td>
+                            <td>2026-03-05</td>
+                            <td>Luxury Property Holdings Settlement</td>
+                            <td>Escrow Outbound</td>
+                            <td class="text-danger">-$85,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>2026-03-02</td>
+                            <td>Private Aviation Asset Lease</td>
+                            <td>Merchant Settlement</td>
+                            <td class="text-danger">-$12,450.00</td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-28</td>
+                            <td>Global Clearing Payroll Origin</td>
+                            <td>Direct Deposit ACH</td>
+                            <td class="text-success">+$8,500.00</td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-25</td>
+                            <td>Premium Insurance Underwriters pool</td>
                             <td>Standing Instruction</td>
-                            <td class="text-danger">-$85.00</td>
+                            <td class="text-danger">-$1,120.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,3 +117,5 @@
 
 </body>
 </html>
+
+
