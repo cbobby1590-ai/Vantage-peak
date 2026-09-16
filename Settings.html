@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings | Vantage Peake Bank</title>
+    <link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation Menu Column -->
+        <aside class="sidebar">
+            <div class="logo">Vantage<span>Peake</span></div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html">Overview Ledger</a></li>
+                <li><a href="rewards.html">Rewards Portal</a></li>
+                <li><a href="transfer.html">Fund Transits</a></li>
+                <li><a href="#">Card Matrix</a></li>
+                <li><a href="#">Document Records</a></li>
+                <li><a href="settings.html" class="active">System Settings</a></li>
+                <li><a href="index.html" style="margin-top: 3rem; color: #EF4444;">Terminate Session</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Account Dashboard Data Feed Column -->
+        <main class="dashboard-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <small style="color: var(--text-light); text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Account Configuration Panel</small>
+                    <h2 style="margin-top: 0.25rem;">Sarah Emma Sophia</h2>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-light); text-align: right;">
+                    <div>System ID: #VPT-94821</div>
+                    <div>Security Tier: Level 4 Private</div>
+                </div>
+            </header>
+
+            <div style="max-width: 800px;">
+                <!-- Section 1: Personal Profile Data -->
+                <div style="background-color: var(--white); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 0.25rem;">Profile Registration Details</h3>
+                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;">Update contact channels bound to this cryptographic asset registration profile.</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Profile registries updated successfully.');">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="full-name">Account Owner Registered Name</label>
+                                <input type="text" id="full-name" class="form-control" value="Sarah Emma Sophia" disabled style="background-color: #F1F5F9; color: var(--text-light);">
+                            </div>
+                            <div class="form-group">
+                                <label for="email-addr">Primary Communication Email</label>
+                                <input type="email" id="email-addr" class="form-control" value="sarah.sophia@signature-holdings.ltd" required>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="phone-num">Secured Mobile Verification Routing Line</label>
+                                <input type="tel" id="phone-num" class="form-control" value="+1 (555) 019-3482" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mailing-addr">Primary Residential / Corporate Domain</label>
+                                <input type="text" id="mailing-addr" class="form-control" value="750 Park Avenue, Penthouse B, New York, NY" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit" style="width: auto; padding: 0.75rem 2rem; background-color: var(--primary-navy);">Commit Profile Updates</button>
+                    </form>
+                </div>
+
+                <!-- Section 2: Security & Session Configurations -->
+                <div style="background-color: var(--white); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 0.25rem;">Cryptographic & Session Authorization Parameters</h3>
+                    <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;">Manage active authentication rulesets and secondary hardware validation gates.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <strong style="display: block; color: var(--text-dark);">Multi-Factor Hardware Token Authentication (MFA)</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-light);">Enforce biometric or physical YubiKey validation prompts during ledger settlement authorization routines.</span>
+                            </div>
+                            <div style="color: var(--accent-emerald); font-weight: bold; background-color: #D1FAE5; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">ACTIVE</div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <strong style="display: block; color: var(--text-dark);">International Asset Dispatch Alert Framework</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-light);">Dispatches instantaneous push commands across phone networks if a wire volume exceeds $50,000.00.</span>
+                            </div>
+                            <div style="color: var(--accent-emerald); font-weight: bold; background-color: #D1FAE5; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">ACTIVE</div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong style="display: block; color: var(--text-dark);">Automated Session Timeout Duration</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-light);">Terminates local web browser application state cookies following target intervals of user non-action.</span>
+                            </div>
+                            <select class="form-control" style="width: auto; min-width: 150px;">
+                                <option>5 Minutes</option>
+                                <option selected>10 Minutes</option>
+                                <option>30 Minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
