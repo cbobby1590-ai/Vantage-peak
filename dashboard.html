@@ -3,70 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Vantage Peake Bank</title>
+    <title>Secure Portal | Vantage Peake Bank</title>
     <style>
-        /* Base Reset & Typography */
+        /* Modern UI Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #f4f6f9;
-            color: #333333;
+            background-color: #f8fafc;
+            color: #0f172a;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-bottom: 80px; /* Space for the bottom navbar */
+            padding-bottom: 90px; /* Space for fixed bottom layout navigation bar */
         }
 
-        /* Top Portal Header */
-        header {
-            background-color: #0c2340;
-            color: #ffffff;
-            padding: 20px;
+        /* Top Bar Interface Layout */
+        .top-navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid #d4af37;
         }
 
-        .user-profile h1 {
-            font-size: 1.5rem;
+        .brand-greeting h2 {
+            font-size: 1.4rem;
             font-weight: 700;
+            color: #0f172a;
         }
 
-        .user-profile p {
-            color: #d4af37;
+        .brand-greeting p {
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #64748b;
             margin-top: 2px;
         }
 
-        .system-status {
-            text-align: right;
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #166534;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .status-badge {
-            background-color: #2e7d32;
-            color: #ffffff;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 4px;
-        }
-
-        .system-status p {
-            font-size: 0.8rem;
-            color: #cbd5e1;
-        }
-
-        /* Core Workspace Layout */
+        /* Core Workspace Containers */
         main {
             flex: 1;
             width: 100%;
@@ -75,299 +66,297 @@
             padding: 30px 20px;
         }
 
-        /* Balance Grid (Cards) */
-        .balance-grid {
+        /* Section Split Layout: Balances Left, Quick Links Right */
+        .dashboard-split {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
-        .account-card {
-            background: linear-gradient(135deg, #0c2340 0%, #1a3a60 100%);
-            color: #ffffff;
-            padding: 25px;
+        .balance-strip {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 4px solid #d4af37;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 6px solid #0f172a;
         }
 
-        .account-card::before {
-            content: '';
-            position: absolute;
-            right: -30px;
-            bottom: -30px;
-            width: 150px;
-            height: 150px;
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 50%;
+        .balance-strip:last-child {
+            border-left-color: #d4af37;
         }
 
-        .account-card h3 {
-            font-size: 0.9rem;
-            color: #cbd5e1;
+        .balance-strip span {
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
+            color: #64748b;
+            font-weight: 600;
         }
 
-        .account-balance {
+        .balance-strip h3 {
             font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 8px 0;
         }
 
-        .account-meta {
-            display: flex;
-            justify-content: space-between;
+        .balance-strip p {
             font-size: 0.85rem;
             color: #94a3b8;
-        }
-
-        .account-meta span {
-            color: #ffffff;
             font-family: monospace;
         }
 
-        /* Quick Portal Actions */
-        .actions-panel {
+        .quick-actions-box {
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .action-btn {
-            background-color: #f1f5f9;
-            color: #0c2340;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
+        .quick-actions-box h4 {
+            font-size: 0.9rem;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .action-link {
+            display: block;
+            text-align: center;
+            background-color: #0f172a;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            text-align: center;
+            transition: background-color 0.2s;
         }
 
-        .action-btn:hover {
+        .action-link:hover {
             background-color: #d4af37;
-            color: #0c2340;
+            color: #0f172a;
         }
 
-        .action-btn.primary {
-            background-color: #0c2340;
-            color: #ffffff;
+        .action-link.secondary {
+            background-color: #f1f5f9;
+            color: #0f172a;
         }
 
-        .action-btn.primary:hover {
-            background-color: #d4af37;
-            color: #0c2340;
+        .action-link.secondary:hover {
+            background-color: #e2e8f0;
         }
 
-        /* Ledger Transactions Table Container */
-        .ledger-container {
+        /* Large Statement Ledger Grid */
+        .ledger-card {
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 25px;
-            overflow-hidden;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
         }
 
-        .ledger-header {
+        .ledger-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .tx-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tx-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-
-        .ledger-header h2 {
-            color: #0c2340;
-            font-size: 1.3rem;
-        }
-
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-
-        th {
-            background-color: #f8fafc;
-            color: #64748b;
-            padding: 14px 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        td {
-            padding: 14px 16px;
+            padding: 16px 0;
             border-bottom: 1px solid #f1f5f9;
-            color: #334155;
         }
 
-        tr:hover td {
-            background-color: #f8fafc;
+        .tx-row:last-child {
+            border-bottom: none;
         }
 
-        /* Credit vs Debit Coloring labels */
-        .amt-credit {
+        .tx-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tx-merchant {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        .tx-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .tx-amount {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .tx-amount.negative {
+            color: #0f172a;
+        }
+
+        .tx-amount.positive {
             color: #16a34a;
-            font-weight: 600;
         }
 
-        .amt-debit {
-            color: #dc2626;
-            font-weight: 600;
-        }
-
-        .tx-type {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .tx-wire { background-color: #e0f2fe; color: #0369a1; }
-        .tx-pos { background-color: #f1f5f9; color: #475569; }
-        .tx-ach { background-color: #f0fdf4; color: #166534; }
-        .tx-atm { background-color: #fef2f2; color: #991b1b; }
-
-        /* Fixed Bottom Navigation Configuration */
+        /* Sticky Bottom Navigation Config */
         footer {
-            background-color: #0c2340;
+            background-color: #ffffff;
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
-            z-index: 9999;
+            border-top: 1px solid #e2e8f0;
+            z-index: 10000;
         }
 
-        .navigation-menu {
-            max-width: 1200px;
+        .bottom-nav {
+            max-width: 800px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            padding: 15px 10px;
+            padding: 12px 20px;
             list-style: none;
         }
 
-        .navigation-menu li a {
-            color: #ffffff;
+        .bottom-nav li a {
+            color: #64748b;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 10px 18px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .navigation-menu li a:hover, 
-        .navigation-menu li a.active {
-            background-color: #d4af37;
-            color: #0c2340;
+        .bottom-nav li a:hover,
+        .bottom-nav li a.active {
+            color: #0f172a;
+            background-color: #f1f5f9;
         }
 
-        .navigation-menu li .logout-btn {
-            background-color: #7f1d1d;
-            color: #ffffff;
+        .bottom-nav li a.exit-link {
+            color: #dc2626;
         }
 
-        .navigation-menu li .logout-btn:hover {
-            background-color: #dc2626;
-            color: #ffffff;
+        .bottom-nav li a.exit-link:hover {
+            background-color: #fef2f2;
         }
 
-        /* Screen Adjustment Rules */
-        @media (max-width: 768px) {
-            body {
-                padding-bottom: 140px;
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .dashboard-split {
+                grid-template-columns: 1fr;
             }
-            header {
+            .top-navbar {
+                padding: 20px;
                 flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            .system-status {
+                gap: 15px;
                 text-align: center;
             }
-            .navigation-menu {
-                flex-wrap: wrap;
-                gap: 8px;
-                padding: 12px 5px;
+        }
+
+        @media (max-width: 600px) {
+            .bottom-nav {
+                padding: 10px 5px;
             }
-            .navigation-menu li a {
-                font-size: 0.85rem;
-                padding: 6px 12px;
+            .bottom-nav li a {
+                font-size: 0.75rem;
+                padding: 6px 10px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Secure Dashboard Header -->
-    <header>
-        <div class="user-profile">
-            <h1>Welcome Back, User</h1>
-            <p>Premium Asset Tier Client</p>
+    <!-- Top Minimalist Utility Area -->
+    <nav class="top-navbar">
+        <div class="brand-greeting">
+            <h2>Hello, User</h2>
+            <p>Welcome to your secure asset vault.</p>
         </div>
-        <div class="system-status">
-            <span class="status-badge">Encrypted Portal</span>
-            <p>Last Login: Today at 10:14 AM</p>
+        <div class="security-badge">
+            <span>External SSL Encrypted Connection</span>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Financial Workspace -->
+    <!-- Main Dynamic Interface Portal -->
     <main>
         
-        <!-- Live Balance Cards Grid -->
-        <section class="balance-grid">
+        <!-- Multi-Grid Balance and Fast Actions Panel -->
+        <section class="dashboard-split">
             
-            <!-- Checking Ledger Card -->
-            <div class="account-card">
-                <h3>Vantage Checking Account</h3>
-                <div class="account-balance">$48,250.71</div>
-                <div class="account-meta">
-                    <span>Acc: •••• 9821</span>
-                    <span>Available Balance</span>
+            <div class="balance-layout" style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Card 1 -->
+                <div class="balance-strip">
+                    <span>Checking Ledger Account</span>
+                    <h3>$48,250.71</h3>
+                    <p>ACCOUNT ID: VP-9821-8201</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="balance-strip">
+                    <span>High Yield Term Savings</span>
+                    <h3>$214,890.45</h3>
+                    <p>ACCOUNT ID: VP-4402-1192</p>
                 </div>
             </div>
 
-            <!-- Savings Ledger Card -->
-            <div class="account-card">
-                <h3>High-Yield Wealth Savings</h3>
-                <div class="account-balance">$214,890.45</div>
-                <div class="account-meta">
-                    <span>Acc: •••• 4402</span>
-                    <span>4.85% APY Active</span>
-                </div>
+            <!-- Management Portal Links Container -->
+            <div class="quick-actions-box">
+                <h4>Vault Tools</h4>
+                <a href="transfer.html" class="action-link">Wire Transfer Funds</a>
+                <a href="billpay.html" class="action-link secondary">Pay Invoices</a>
+                <a href="statements.html" class="action-link secondary">Tax Documents</a>
             </div>
 
         </section>
 
-        <!-- Dynamic User Actions Menu -->
-        <section class="actions-panel">
-            <a href="transfer.html" class="action-btn primary">Send Wire Transfer</a>
-            <a href="billpay.html" class="action-btn">Pay Bills</a>
+        <!-- Comprehensive Activity History Ledger -->
+        <section class="ledger-card">
+            <h3 class="ledger-title">Activity Ledger</h3>
+            <div class="tx-list">
+                
+                <!-- Item 1 -->
+                <div class="tx-row">
+                    <div class="tx-details">
+                        <span class="tx-merchant">ApexTech Corporate Wire</span>
+                        <span class="tx-meta">Today at 2:14 PM • Internal Direct Transfer</span>
+                    </div>
+                    <div class="tx-amount positive">+$6,850.00</div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="tx-row">
+                    <div class="tx-details">
+                        <span class="tx-merchant">Amazon Web Services Cloud Edge</span>
+                        <span class="tx-meta">Yesterday at 11:05 AM • POS Merchant Card</span>
+                    </div>
+                    <div class="tx-amount negative">-$312.45</div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="tx-row">
+                    <div class="tx-details">
