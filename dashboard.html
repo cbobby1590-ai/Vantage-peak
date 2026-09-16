@@ -1,57 +1,261 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Overview Workspace | Vantage Peake Bank</title>
-    <link rel="stylesheet" href="base.css">
+    <title>Account Workspace Portal | Vantage Peake Bank</title>
+    <style>
+        /* Base Styling Schema Embedded for Seamless Single-Page Execution */
+        :root {
+            --primary-navy: #0F172A;
+            --accent-emerald: #10B981;
+            --slate-blue: #334155;
+            --light-bg: #F8FAFC;
+            --border-color: #E2E8F0;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Top Unified Navigation Header Bar */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-navy);
+            padding: 1.25rem 5%;
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-emerald);
+        }
+
+        .btn-logout {
+            background-color: #EF4444;
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.9;
+        }
+
+        /* Content Container Wrappers */
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Section Layout Blocks placed Under Each Other */
+        .page-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .section-title {
+            color: var(--primary-navy);
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Account Balances Grid Layout */
+        .balances-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .balance-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+        }
+
+        /* Ledger Table Design */
+        .table-wrapper {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #F1F5F9;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--slate-blue);
+        }
+
+        .text-success { color: #10B981; font-weight: 600; }
+        .text-danger { color: #EF4444; font-weight: 600; }
+
+        /* Rewards Milestone Architecture Grid */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .voucher-card {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Setting Forms Utility Classes */
+        .form-group-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-control-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-control-block label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--slate-blue);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .btn-action {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: auto;
+            align-self: flex-start;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        /* Switch Toggle Layout */
+        .toggle-setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body>
 
-    <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="logo">Vantage<span>Peake</span></div>
-            <ul class="sidebar-menu">
-                <li><a href="dashboard.html" class="active">Overview Ledger</a></li>
-                <li><a href="rewards.html">Rewards Portal</a></li>
-                <li><a href="transfer.html">Fund Transits</a></li>
-                <li><a href="#">Card Matrix</a></li>
-                <li><a href="#">Document Records</a></li>
-                <li><a href="index.html" style="margin-top: 3rem; color: #EF4444;">Terminate Session</a></li>
-            </ul>
-        </aside>
+    <!-- Top Navigation Header -->
+    <nav class="top-navbar">
+        <div class="logo">Vantage<span>Peake</span></div>
+        <div style="font-size: 0.9rem; font-weight: 500;">Secure Portal Interface</div>
+        <a href="index.html" class="btn-logout">Terminate Session</a>
+    </nav>
 
-        <main class="dashboard-content">
-            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <div>
-                    <small style="color: var(--text-light); text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Primary Profile Owner</small>
-                    <h2 style="margin-top: 0.25rem;">Sarah Emma Sophia</h2>
-                </div>
-                <div style="font-size: 0.9rem; color: var(--text-light); text-align: right;">
-                    <div>System ID: #VPT-94821</div>
-                    <div>Session Status: Authenticated</div>
-                </div>
-            </header>
-
-            <div class="grid-3">
-                <div class="card">
-                    <small style="color: var(--text-light); font-weight: 600;">Liquid Checking Ledger</small>
-                    <h2 style="font-size: 2.2rem; margin-top: 0.5rem; color: var(--primary-navy);">$34,000,000.00</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">Routing Route: ****5678</p>
-                </div>
-                <div class="card">
-                    <small style="color: var(--text-light); font-weight: 600;">High-Yield Yield Hold</small>
-                    <h2 style="font-size: 2.2rem; margin-top: 0.5rem; color: var(--accent-emerald);">$5,241,904.11</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem;">Yield: 4.85% APY</p>
-                </div>
+    <div class="dashboard-container">
+        
+        <!-- Welcome Block & Header Data Entry -->
+        <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border-color);">
+            <div>
+                <small style="color: var(--text-light); text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Primary Profile System Owner</small>
+                <h1 style="font-size: 2.2rem; color: var(--primary-navy); margin-top: 0.25rem;">Sarah Emma Sophia</h1>
             </div>
+            <div style="text-align: right; font-size: 0.9rem; color: var(--text-light);">
+                <div>Account Registry ID: <strong style="color: var(--text-dark);">#VPT-94821</strong></div>
+                <div>Status Level: Private Client Tier 4</div>
+            </div>
+        </header>
 
-            <!-- Highly Expanded Transaction Ledger -->
+        <!-- SUBSECTION 1: Core Balances Grid Overview -->
+        <div class="balances-grid">
+            <div class="balance-card">
+                <small style="color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Liquid Checking Ledger</small>
+                <h2 style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--primary-navy);">$34,000,000.00</h2>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">Account Routing Number: ****5678</p>
+            </div>
+            <div class="balance-card" style="border-top: 4px solid var(--accent-emerald);">
+                <small style="color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">High-Yield Investment Hold</small>
+                <h2 style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--accent-emerald);">$5,241,904.11</h2>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">Yield Performance Bracket: 4.85% APY</p>
+            </div>
+        </div>
+
+        <!-- SUBSECTION 2: Transaction History Ledger Table -->
+        <section class="page-section">
+            <h3 class="section-title">Recent Account Transaction History Ledger</h3>
+            <p class="section-subtitle">Real-time logging documentation for audited capital allocation transfers, inbound wire channels, and assets execution records.</p>
+            
             <div class="table-wrapper">
-                <div style="padding: 1.25rem; font-weight: 600; border-bottom: 1px solid var(--border-color); background-color: #F8FAFC;">
-                    Recent Account Transaction History Ledger
-                </div>
                 <table>
                     <thead>
                         <tr>
@@ -83,59 +287,3 @@
                         <tr>
                             <td>2026-03-10</td>
                             <td>Vanguard Asset Liquidation Placement</td>
-                            <td>Securities Wire</td>
-                            <td class="text-success">+$21,350,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-03-08</td>
-                            <td>London Real Estate Escrow Wire</td>
-                            <td>International Wire</td>
-                            <td class="text-danger">-$4,200,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-03-05</td>
-                            <td>Luxury Property Holdings Settlement</td>
-                            <td>Escrow Outbound</td>
-                            <td class="text-danger">-$85,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-03-02</td>
-                            <td>Private Aviation Asset Lease</td>
-                            <td>Merchant Settlement</td>
-                            <td class="text-danger">-$12,450.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-02-28</td>
-                            <td>Global Clearing Payroll Origin</td>
-                            <td>Direct Deposit ACH</td>
-                            <td class="text-success">+$8,500.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-02-27</td>
-                            <td>Fine Art Consignment Premium</td>
-                            <td>Inbound ACH</td>
-                            <td class="text-success">+$115,000.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-02-25</td>
-                            <td>Premium Insurance Underwriters pool</td>
-                            <td>Standing Instruction</td>
-                            <td class="text-danger">-$1,120.00</td>
-                        </tr>
-                        <tr>
-                            <td>2026-02-20</td>
-                            <td>Marine Transit Yacht Mooring Registry</td>
-                            <td>Merchant Settlement</td>
-                            <td class="text-danger">-$6,400.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
-    </div>
-
-</body>
-</html>
-
-
-
