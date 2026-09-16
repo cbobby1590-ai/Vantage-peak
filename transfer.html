@@ -3,49 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfer Funds</title>
+    <title>Transfer Funds | Vantage Peake Bank</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #0f172a; color: #f8fafc; }
-        .dashboard-container { display: flex; flex-direction: column; width: 100vw; height: 100vh; }
-        .main-content { flex: 1; padding: 24px; overflow-y: auto; padding-bottom: 100px; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: 70px; background-color: #1e293b; border-top: 1px solid #334155; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
-        .nav-item { text-decoration: none; color: #94a3b8; display: flex; flex-direction: column; align-items: center; font-size: 0.85rem; font-weight: 500; }
-        .nav-item:hover, .nav-item.active { color: #38bdf8; }
-        .nav-icon { font-size: 1.4rem; margin-bottom: 4px; }
-        .header { margin-bottom: 24px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #94a3b8; font-size: 0.9rem; }
-        input, select { width: 100%; padding: 12px; background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; color: white; font-size: 1rem; }
-        .btn { width: 100%; padding: 14px; background-color: #38bdf8; border: none; border-radius: 8px; color: #0f172a; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 10px; }
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 90px; /* Space for sticky bottom nav */
+        }
+
+        /* Top Header Navigation System */
+        .top-navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-greeting h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .brand-greeting p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Multi-Column Main Area Workspace */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Modular Form Segment Panels */
+        .transfer-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            height: max-content;
+        }
+
+        .transfer-card h3 {
+            font-size: 1.2rem;
+            color: #0f172a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transfer-card .badge {
+            font-size: 0.75rem;
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .transfer-card.intl h3 .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        /* Form Controls Formatting */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group select, 
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #0f172a;
+            background-color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group select:focus, 
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #0f172a;
+        }
+
+        /* Interactive Buttons */
+        .action-submit-btn {
+            width: 100%;
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 5px;
+        }
+
+        .action-submit-btn:hover {
+            background-color: #d4af37;
+            color: #0f172a;
+        }
+
+        /* Sticky Footer Navigation Bar Configuration */
+        footer {
+            background-color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid #e2e8f0;
+            z-index: 10000;
+        }
+
+        .bottom-nav {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            list-style: none;
+        }
+
+        .bottom-nav li a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .bottom-nav li a:hover,
+        .bottom-nav li a.active {
+            color: #0f172a;
+            background-color: #f1f5f9;
+        }
+
+        .bottom-nav li a.exit-link {
+            color: #dc2626;
+        }
+
+        /* Layout Media Queries for Small Displays */
+        @media (max-width: 850px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .bottom-nav {
+                padding: 10px 5px;
+            }
+            .bottom-nav li a {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <main class="main-content">
-            <header class="header"><h1>Transfer Funds</h1></header>
-            <div style="background-color: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+
+    <!-- Platform Header Panel -->
+    <nav class="top-navbar">
+        <div class="brand-greeting">
+            <h2>Authorized Capital Routing Terminal</h2>
+            <p>Verification Entity: Sarah Emma Sophia</p>
+        </div>
+    </nav>
+
+    <!-- Content Workspace -->
+    <main>
+        
+        <!-- COLUMN 1: LOCAL BANK CLEARING FORM -->
+        <div class="transfer-card">
+            <h3>Local Bank Transfer <span class="badge">ACH / Instant</span></h3>
+            <form onsubmit="alert('Local ACH transaction request submitted for internal authorization matching.'); return false;">
+                
                 <div class="form-group">
-                    <label>Recipient Name / Account</label>
-                    <input type="text" placeholder="Enter name or account number">
+                    <label for="local-source">Debit Account Source</label>
+                    <select id="local-source" required>
+                        <option value="checking">Vantage Checking (•••• 9821) - $48,250.71</option>
+                        <option value="savings">High Yield Savings (•••• 4402) - $214,890.45</option>
+                    </select>
                 </div>
+
                 <div class="form-group">
-                    <label>Bank / Destination</label>
-                    <select><option>Select Bank</option><option>Main Wallet</option></select>
+                    <label for="local-routing">9-Digit Routing Transit Number</label>
+                    <input type="text" id="local-routing" placeholder="Enter standard local bank routing code" required pattern="[0-9]{9}">
                 </div>
+
                 <div class="form-group">
-                    <label>Amount ($)</label>
-                    <input type="number" placeholder="0.00">
+                    <label for="local-account">Beneficiary Account Number</label>
+                    <input type="text" id="local-account" placeholder="Enter recipient destination account number" required pattern="[0-9]{4,17}">
                 </div>
-                <button class="btn">Send Money</button>
-            </div>
-        </main>
-        <nav class="bottom-nav">
-            <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Home</span></a>
-            <a href="transfer.html" class="nav-item active"><span class="nav-icon">💸</span><span>Transfer</span></a>
-            <a href="reward.html" class="nav-item"><span class="nav-icon">🎁</span><span>Rewards</span></a>
-            <a href="settings.html" class="nav-item"><span class="nav-icon">⚙️</span><span>Settings</span></a>
-        </nav>
-    </div>
-</body>
-</html>
+
+                <div class="form-group">
+                    <label for="local-name">Recipient Legal Name</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="local-amount">Amount (USD)</label>
+                    <input type="number" id="local-amount" placeholder="0.00" min="1.00" max="50000.00" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="local-memo">Memo / Internal Reference</label>
+                    <input type="text" id="local-memo" placeholder="Optional reference notes">
+                </div>
+
+                <button type="submit" class="action-submit-btn">Authorize Local Sweep</button>
+            </form>
+        </div>
+
+        <!-- COLUMN 2: INTERNATIONAL SWIFT CLEARING FORM -->
+        <div class="transfer-card intl">
+            <h3>International Wire Transfer <span class="badge">SWIFT / IBAN</span></h3>
+            <form onsubmit="alert('International cross-border transfer log routed to global clearing desk.'); return false;">
+                
+                <div class="form-group">
+                    <label for="intl-source">Debit Account Source</label>
+                    <select id="intl-source" required>
+                        <option value="checking">Vantage Checking (•••• 9821) - $48,250.71</option>
+                        <option value="savings">High Yield Savings (•••• 4402) - $214,890.45</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="intl-swift">SWIFT / BIC Bank Identifier Code</label>
+                    <input type="text" id="intl-swift" placeholder="8 or 11 alphanumeric code" uppercase required style="text-transform: uppercase;">
+                </div>
+
+                <div class="form-group">
+                    <label for="intl-iban">International Account Number / IBAN</label>
+                    <input type="text" id="intl-iban" placeholder="Enter target cross-border account string" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="intl-bank-details">Receiver Institution Name &amp; Country</label>
+                    <input type="text" id="intl-bank-details" placeholder="e.g. Deutsche Bank AG, Frankfurt, Germany" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="intl-name">Beneficiary Full Legal Name</label>
+                    <input type="text" id="intl-name" placeholder="Exact registration matching global passport records" required>
+                </div>
+
+                <div class="form-group">
