@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Application</title>
+    <title>Enterprise Banking Portal</title>
     <style>
         /* Global CSS Reset & Setup */
         * {
@@ -16,12 +16,12 @@
         body, html {
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Prevents ugly browser page scrolling */
+            overflow: hidden; /* Prevents whole browser window from scrolling */
             background-color: #0f172a;
             color: #f8fafc;
         }
 
-        /* App Base Layout Layout Frame */
+        /* App Base Layout Frame */
         .app-container {
             display: flex;
             flex-direction: column;
@@ -35,10 +35,10 @@
             flex: 1;
             padding: 24px;
             overflow-y: auto; /* Independent scrolling inside each view */
-            padding-bottom: 90px; /* Buffer space so navigation bar never overlaps data */
+            padding-bottom: 95px; /* Buffer space so navigation bar never overlaps data */
         }
 
-        /* Displays the targeted view layout */
+        /* Displays the active screen */
         .app-view.active-view {
             display: block;
         }
@@ -52,6 +52,12 @@
             font-size: 1.8rem;
             font-weight: 600;
         }
+        
+        .header p {
+            color: #94a3b8;
+            margin-top: 4px;
+            font-size: 1rem;
+        }
 
         .card {
             background-color: #1e293b;
@@ -62,7 +68,7 @@
         }
 
         /* -----------------------------
-           VIEW 1: DASHBOARD DESIGNS
+           VIEW 1: DASHBOARD VIEW
         -------------------------------- */
         .metrics-grid {
             display: grid;
@@ -76,11 +82,13 @@
             color: #94a3b8;
             margin-bottom: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .metrics-grid .card .value {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .value.green { color: #10b981; }
@@ -126,8 +134,40 @@
         .tx-amount.expense { color: #f43f5e; }
 
         /* -----------------------------
-           VIEW 2: TRANSFER DESIGNS
+           VIEW 2: TRANSFER VIEW (LOCAL/INTL)
         -------------------------------- */
+        .transfer-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-btn.active-tab {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+        }
+
+        .transfer-form-pane {
+            display: none;
+        }
+        
+        .transfer-form-pane.active-pane {
+            display: block;
+        }
+
         .form-group {
             margin-bottom: 18px;
         }
@@ -164,10 +204,13 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
+        
+        .btn:hover { opacity: 0.9; }
 
         /* -----------------------------
-           VIEW 3: REWARDS DESIGNS
+           VIEW 3: REWARDS VIEW
         -------------------------------- */
         .reward-row {
             display: flex;
@@ -192,7 +235,7 @@
         }
 
         /* -----------------------------
-           VIEW 4: SETTINGS DESIGNS
+           VIEW 4: SETTINGS VIEW
         -------------------------------- */
         .setting-item {
             display: flex;
@@ -257,71 +300,44 @@
         <!-- SCREEN 1: DASHBOARD -->
         <main id="dashboard" class="app-view active-view">
             <header class="header">
-                <h1>Financial Dashboard</h1>
+                <h1>Welcome Back,</h1>
+                <p style="font-size: 1.4rem; font-weight: 600; color: #f8fafc;">Sarah Emma Sophia</p>
             </header>
 
             <section class="metrics-grid">
-                <div class="card">
-                    <h3>Total Balance</h3>
-                    <div class="value">$14,240.50</div>
+                <div class="card" style="grid-column: span 1 / max-content;">
+                    <h3>Available Balance (USD)</h3>
+                    <div class="value" style="color: #38bdf8;">$24,000,000.00</div>
                 </div>
                 <div class="card">
-                    <h3>Monthly Income</h3>
-                    <div class="value green">+$5,300.00</div>
+                    <h3>Monthly Inflow</h3>
+                    <div class="value green">+$145,000.00</div>
                 </div>
                 <div class="card">
-                    <h3>Monthly Expenses</h3>
-                    <div class="value red">-$2,120.45</div>
+                    <h3>Monthly Outflow</h3>
+                    <div class="value red">-$12,450.00</div>
                 </div>
             </section>
 
             <section class="card transactions-section">
-                <h2>Recent Transactions</h2>
+                <h2>Recent Transactions Ledger</h2>
                 <div class="transaction-list">
+                    <div class="transaction-item income">
+                        <div class="tx-info">
+                            <div class="tx-name">Asset Dividend Payment</div>
+                            <div class="tx-date">Sept 16, 2026 • Wire Inflow</div>
+                        </div>
+                        <div class="tx-amount income">+$45,000.00</div>
+                    </div>
                     <div class="transaction-item expense">
                         <div class="tx-info">
-                            <div class="tx-name">Netflix Subscription</div>
-                            <div class="tx-date">Sept 16, 2026 • Streaming</div>
+                            <div class="tx-name">Corporate Real Estate Fee</div>
+                            <div class="tx-date">Sept 14, 2026 • Property</div>
                         </div>
-                        <div class="tx-amount expense">-$15.49</div>
+                        <div class="tx-amount expense">-$8,500.00</div>
                     </div>
                     <div class="transaction-item income">
                         <div class="tx-info">
-                            <div class="tx-name">Freelance Web Design</div>
-                            <div class="tx-date">Sept 15, 2026 • Income</div>
+                            <div class="tx-name">International Trust Transfer</div>
+                            <div class="tx-date">Sept 10, 2026 • Inflow</div>
                         </div>
-                        <div class="tx-amount income">+$1,200.00</div>
-                    </div>
-                    <div class="transaction-item expense">
-                        <div class="tx-info">
-                            <div class="tx-name">Starbucks Coffee</div>
-                            <div class="tx-date">Sept 14, 2026 • Food</div>
-                        </div>
-                        <div class="tx-amount expense">-$6.75</div>
-                    </div>
-                    <div class="transaction-item expense">
-                        <div class="tx-info">
-                            <div class="tx-name">Amazon Web Services</div>
-                            <div class="tx-date">Sept 12, 2026 • Cloud</div>
-                        </div>
-                        <div class="tx-amount expense">-$42.30</div>
-                    </div>
-                    <div class="transaction-item income">
-                        <div class="tx-info">
-                            <div class="tx-name">Bi-Weekly Salary</div>
-                            <div class="tx-date">Sept 11, 2026 • Salary</div>
-                        </div>
-                        <div class="tx-amount income">+$2,450.00</div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- SCREEN 2: TRANSFER -->
-        <main id="transfer" class="app-view">
-            <header class="header">
-                <h1>Transfer Funds</h1>
-            </header>
-            <div class="card">
-                <div class="form-group">
-                    <label>Recipient Name / Account</label>
